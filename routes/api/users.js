@@ -26,14 +26,8 @@ router.post("/ownRecipes", authenticate, ctrl.addOwnRecipes);
 router.delete("/ownRecipes", authenticate, ctrl.delOwnRecipes);
 // - удалить рецепт у пользователя
 
-router.get("/favorite", authenticate, ctrl.addFavorite);
-// - добавление пользователем рецепта в FAvorite
-
 router.get("/favorite/:userId", authenticate, ctrl.getFavorite);
 // - получение Favorite рецептов пользователя
-
-router.delete("/favorite/:userId", authenticate, ctrl.delFavorite);
-// - удаление Favorite рецептов у пользователя
 
 router.get("/shopping-list", authenticate, ctrl.getShoppingList);
 // - получить продукты из списка покупок
