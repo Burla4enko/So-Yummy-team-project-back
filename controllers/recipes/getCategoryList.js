@@ -15,8 +15,6 @@ const getCategoryList = async (req, res) => {
     (category, index, array) => array.indexOf(category) === index
   );
 
-  const finalResult = uniqueCategoryList.slice(page - 1, limit);
-
-  return res.status(200).json(finalResult);
+  return res.status(200).json(uniqueCategoryList);
 };
 module.exports = getCategoryList;
