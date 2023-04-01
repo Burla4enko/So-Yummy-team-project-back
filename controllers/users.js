@@ -45,7 +45,7 @@ const addOwnRecipes = async (req, res) => {
 // добавить рецепты пользователя
 
 const delOwnRecipes = async (req, res) => {
-  const { _id: recipeId } = req.body;
+  const { _id: recipeId } = req.body; //<- отримує ID рецепту//
   const result = await Recipe.findByIdAndRemove(recipeId);
   if (!result) {
     throw HttpError(404, 'Server not found');

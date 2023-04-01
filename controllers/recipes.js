@@ -15,7 +15,12 @@ const getRecipesByIngredients = async (req, res) => {};
 
 const getIngredientsList = async (req, res) => {};
 
-const getPopularRecipes = async (req, res) => {};
+const getPopularRecipes = async (req, res) => {
+  console.log('goooo');
+  res.json({
+    message: 'Recipe',
+  });
+};
 
 module.exports = {
   getCategoryList: ctrlWrapper(getCategoryList),
