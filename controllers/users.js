@@ -8,10 +8,19 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 
 const { SECRET_KEY, BASE_URL } = process.env;
 
-const updateUser = async (req, res) => {};
+const updateUser = async (req, res) => {
+  if (Object.keys(req.body).length === 0)
+    throw HttpError(400, "missing fields");
+  const user = await User.findByIdAndUpdate(req.user._id, req.body, {
+    new: true,
+  });
+  res.json(user);
+};
 // обновить данные пользователя
 
-const getInfo = async (req, res) => {};
+const getInfo = async (req, res) => {
+    res.json(req.user);
+};
 // получить данные пользователя
 
 const subscribeUser = async (req, res) => {};
