@@ -1,7 +1,7 @@
 const express = require("express");
 const ctrl = require("../../controllers/users");
 const { authenticate, uploadCloud } = require("../../middlewares");
-const { schemasJoi } = require("../../models/user");
+// const { schemasJoi } = require("../../models/user");
 
 const router = express.Router();
 
