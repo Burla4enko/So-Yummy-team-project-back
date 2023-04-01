@@ -2,6 +2,7 @@ const express = require("express");
 const ctrl = require("../../controllers/auth/");
 const { validateBody, authenticate } = require("../../middlewares");
 const { schemasJoi } = require("../../models/user");
+const { subscriptionValidationSchema } = require("../../models/subscription");
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/logout", authenticate, ctrl.logout);
 
-router.post("/subscribe", ctrl.subscribeUser);
+router.post("/subscribe", validateBody(subscriptionValidationSchema), ctrl.subscribeUser);
 // - подписка для рассылки на почту
 
 router.get("/unsubscribe/:email", ctrl.unsubscribeUser);
