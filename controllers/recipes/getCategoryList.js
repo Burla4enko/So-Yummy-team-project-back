@@ -19,5 +19,4 @@ const getCategoryList = async (req, res) => {
 
   return res.status(200).json(finalResult);
 };
-
 module.exports = getCategoryList;
