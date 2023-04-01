@@ -1,5 +1,5 @@
-const { Recipe } = require("../models/recipe");
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { Recipe } = require('../models/recipe');
+const { HttpError, ctrlWrapper } = require('../helpers');
 
 const getCategoryList = async (req, res) => {};
 

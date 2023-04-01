@@ -1,16 +1,17 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-const { uuid } = require("uuidv4");
-require("dotenv").config();
-const { User } = require("../models/user");
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { uuid } = require('uuidv4');
+require('dotenv').config();
+const { User } = require('../models/user');
+const { Recipe } = require('../models/recipe');
+const { HttpError, ctrlWrapper } = require('../helpers');
 
 const { SECRET_KEY, BASE_URL } = process.env;
 
 const updateUser = async (req, res) => {
   if (Object.keys(req.body).length === 0)
-    throw HttpError(400, "missing fields");
+    throw HttpError(400, 'missing fields');
   const user = await User.findByIdAndUpdate(req.user._id, req.body, {
     new: true,
   });
@@ -19,20 +20,38 @@ const updateUser = async (req, res) => {
 // обновить данные пользователя
 
 const getInfo = async (req, res) => {
-    res.json(req.user);
+  res.json(req.user);
 };
 // получить данные пользователя
 
 const subscribeUser = async (req, res) => {};
 // подписка пользователя на рассылку от SoYummy
 
-const getOwnRecipes = async (req, res) => {};
+const getOwnRecipes = async (req, res) => {
+  const { _id: owner } = req.user;
+  const result = await Recipe.find({ owner });
+  if (!result) {
+    throw HttpError(404, 'Server not found');
+  }
+  res.json(result);
+};
 // получить рецепты пользователя
 
-const addOwnRecipes = async (req, res) => {};
+const addOwnRecipes = async (req, res) => {
+  const { _id: owner } = req.user;
+  const result = await Recipe.create({ ...req.body, owner });
+  res.status(201).json(result);
+};
 // добавить рецепты пользователя
 
-const delOwnRecipes = async (req, res) => {};
+const delOwnRecipes = async (req, res) => {
+  const { _id: recipeId } = req.body;
+  const result = await Recipe.findByIdAndRemove(recipeId);
+  if (!result) {
+    throw HttpError(404, 'Server not found');
+  }
+  res.json({ massage: 'Delete success' });
+};
 // удалить рецепт пользователя
 
 const addFavorite = async (req, res) => {};
