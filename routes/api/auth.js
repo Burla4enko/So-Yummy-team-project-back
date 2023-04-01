@@ -25,4 +25,10 @@ router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/logout", authenticate, ctrl.logout);
 
+router.post("/subscribe", ctrl.subscribeUser);
+// - подписка для рассылки на почту
+
+router.get("/unsubscribe/:email", ctrl.unsubscribeUser);
+// - отписка от рассылки на почту
+
 module.exports = router;
