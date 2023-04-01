@@ -3,4 +3,4 @@ const getInfo = async (req, res) => {
 };
 // получить данные пользователя
 
-module.export = getInfo;
+module.exports = getInfo;
