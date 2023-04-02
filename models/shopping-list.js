@@ -4,7 +4,7 @@ const { handleMongooseError } = require("../helpers");
 
 const shoppingListSchema = new Schema(
   {
-    ingregientId: {
+    ingredientId: {
       type: SchemaTypes.ObjectId,
       ref: "ingredient",
       required: [true],
