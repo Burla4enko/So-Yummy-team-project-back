@@ -41,6 +41,10 @@ const userSchema = new Schema(
       default: "",
       required: [true, "Verify token is required"],
     },
+    favorites: {
+      type: Array,
+      default: [],
+    },
   },
   { versionKey: false, timestamps: true }
 );
