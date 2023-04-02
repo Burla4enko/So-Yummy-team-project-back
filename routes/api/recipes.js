@@ -17,7 +17,7 @@ router.get("/main-page", ctrl.getRecipesByCategory);
 router.get("/:category", ctrl.getRecipesByCategoryLimited);
 // - получить рецепты по категориям по 8 шт., над названием подумайте :)
 
-router.get("/:id", ctrl.getRecipeById);
+router.get("/byId/:id", ctrl.getRecipeById);
 // - получить рецепт по id
 
 router.patch("/:id/favorite", authenticate, ctrl.addFavorite);
