@@ -14,9 +14,6 @@ router.get("/info", authenticate, ctrl.getInfo);
 router.get("/info/popular", authenticate, ctrl.getInfo);
 // - задание со *, вывод ПОЛНОЙ инфо оп опльзователю:  кількість днів він в додатку, кількість доданих рецептів, кількість рецептів до обраних.
 
-// router.get("/subscribe", authenticate, ctrl.subscribeUser);
-// // - подписка для рассылки на почту
-
 router.get("/ownRecipes", authenticate, ctrl.getOwnRecipes);
 // - получить рецепты пользователя
 
