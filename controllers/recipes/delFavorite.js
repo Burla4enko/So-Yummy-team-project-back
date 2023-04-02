@@ -1,13 +1,13 @@
-const { Recipe } = require("../../models/recipe");
+const { User } = require("../../models/user");
 const { HttpError } = require("../../helpers");
 
 const delFavorite = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
-  const result = await Recipe.findOneAndUpdate(
-    { _id: id },
-    { $pull: { favorites: owner } },
+  const result = await User.findOneAndUpdate(
+    { _id: owner },
+    { $pull: { favorites: id } },
     {
       new: true,
     }
