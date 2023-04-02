@@ -26,6 +26,10 @@ router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/logout", authenticate, ctrl.logout);
 
+router.get("/google", ctrl.googleAuth);
+
+router.get("/google-redirect", ctrl.googleRedirect);
+
 router.post("/subscribe", validateBody(subscriptionValidationSchema), ctrl.subscribeUser);
 // - подписка для рассылки на почту
 
