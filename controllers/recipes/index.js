@@ -8,6 +8,8 @@ const getRecipeByRequest = require("./getRecipeByRequest");
 const getRecipesByIngredients = require("./getRecipesByIngredients");
 const getIngredientsList = require("./getIngredientsList");
 const getPopularRecipes = require("./getPopularRecipes");
+const addFavorite = require("./addFavorite");
+const delFavorite = require("../recipes/delFavorite");
 
 module.exports = {
   getCategoryList: ctrlWrapper(getCategoryList),
@@ -18,4 +20,6 @@ module.exports = {
   getRecipesByIngredients: ctrlWrapper(getRecipesByIngredients),
   getIngredientsList: ctrlWrapper(getIngredientsList),
   getPopularRecipes: ctrlWrapper(getPopularRecipes),
+  addFavorite: ctrlWrapper(addFavorite),
+  delFavorite: ctrlWrapper(delFavorite),
 };

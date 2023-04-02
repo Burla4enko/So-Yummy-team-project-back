@@ -8,4 +8,4 @@ const delShoppingList = async (req, res) => {
   const { ingredientId } = req.body;
 };
 // удалить продукт из списка покупок
-module.export = delShoppingList;
+module.exports = delShoppingList;
