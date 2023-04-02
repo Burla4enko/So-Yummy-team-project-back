@@ -27,11 +27,6 @@ router.get("/favorite/:userId", authenticate, ctrl.getFavorite);
 // - получение Favorite рецептов пользователя
 
 router.get("/shopping-list", authenticate, ctrl.getShoppingList);
-
-router.get("/favorite/:userId", authenticate, ctrl.getFavorite);
-// - получение Favorite рецептов пользователя
-
-router.get("/shopping-list", authenticate, ctrl.getShoppingList);
 // - получить продукты из списка покупок
 
 router.post("/shopping-list", authenticate, ctrl.addShoppingList);

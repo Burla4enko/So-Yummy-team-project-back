@@ -1,7 +1,7 @@
-const Joi = require('joi');
-const { Schema, model, SchemaTypes } = require('mongoose');
+const Joi = require("joi");
+const { Schema, model, SchemaTypes } = require("mongoose");
 
-const { handleMongooseError } = require('../helpers');
+const { handleMongooseError } = require("../helpers");
 
 const categoryList = [
   "Beef",
@@ -27,7 +27,7 @@ const recipeSchema = new Schema(
   {
     title: {
       type: String,
-      required: [true, 'Title is required'],
+      required: [true, "Title is required"],
       minlength: 3,
     },
     category: {
@@ -37,16 +37,16 @@ const recipeSchema = new Schema(
     },
     area: {
       type: String,
-      default: '',
+      default: "",
     },
     instructions: {
       type: String,
-      required: [true, 'Instructions is required'],
+      required: [true, "Instructions is required"],
       minlength: 20,
     },
     description: {
       type: String,
-      default: '',
+      default: "",
     },
     thumb: {
       type: String,
@@ -58,7 +58,7 @@ const recipeSchema = new Schema(
     },
     time: {
       type: String,
-      required: [true, 'time is required'],
+      required: [true, "time is required"],
     },
     popularity: {
       type: Number,
@@ -74,7 +74,7 @@ const recipeSchema = new Schema(
     },
     youtube: {
       type: String,
-      default: '',
+      default: "",
     },
     tags: {
       type: Array,
@@ -82,11 +82,7 @@ const recipeSchema = new Schema(
     },
     ingredients: {
       type: Array,
-      required: [true, 'ingredients is required'],
-    },
-    owner: {
-      type: SchemaTypes.ObjectId,
-      ref: 'user',
+      required: [true, "ingredients is required"],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -97,7 +93,7 @@ const recipeSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-recipeSchema.post('save', handleMongooseError);
+recipeSchema.post("save", handleMongooseError);
 
 const addRecipeSchema = Joi.object({
   title: Joi.string().min(3).required(),
@@ -125,6 +121,6 @@ const addRecipeSchema = Joi.object({
 const schemasJoi = { addRecipeSchema };
 // ...схемы валидации
 
-const Recipe = model('recipe', recipeSchema);
+const Recipe = model("recipe", recipeSchema);
 
 module.exports = { Recipe, schemasJoi };
