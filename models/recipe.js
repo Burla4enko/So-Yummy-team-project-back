@@ -65,11 +65,11 @@ const recipeSchema = new Schema(
     },
     favorites: {
       type: Array,
-      default: undefined,
+      default: [],
     },
     likes: {
       type: Array,
-      default: undefined,
+      default: [],
     },
     youtube: {
       type: String,

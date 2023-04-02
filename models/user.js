@@ -43,7 +43,7 @@ const userSchema = new Schema(
     },
     favorites: {
       type: Array,
-      default: undefined,
+      default: [],
     },
   },
   { versionKey: false, timestamps: true }
