@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const { User } = require("../../models/user");
 const { HttpError } = require("../../helpers");
 
@@ -10,8 +11,20 @@ const verifyEmail = async (req, res) => {
     verificationToken: null,
   });
 
-  res.json({ message: "Verification successful" });
+  const payload = { id: user._id };
+  const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "7d" });
+  user.token.push(token);
+  await User.findByIdAndUpdate(user._id, { token: user.token });
+
+  res.json({
+    message: "Verification successful",
+    token,
+    user: {
+      name: user.name,
+      email: user.email,
+    },
+  });
 };
-// при успішному підтвердженні - перенаправлення на frontend /api/recipes/main-page
+// при успішному підтвердженні -> отримує token -> frontend main
 
 module.exports = verifyEmail;

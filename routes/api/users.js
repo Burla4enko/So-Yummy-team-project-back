@@ -14,9 +14,6 @@ router.get("/info", authenticate, ctrl.getInfo);
 router.get("/info/popular", authenticate, ctrl.getInfo);
 // - задание со *, вывод ПОЛНОЙ инфо оп опльзователю:  кількість днів він в додатку, кількість доданих рецептів, кількість рецептів до обраних.
 
-router.get("/subscribe", authenticate, ctrl.subscribeUser);
-// - подписка для рассылки на почту
-
 router.get("/ownRecipes", authenticate, ctrl.getOwnRecipes);
 // - получить рецепты пользователя
 
@@ -25,6 +22,11 @@ router.post("/ownRecipes", authenticate, ctrl.addOwnRecipes);
 
 router.delete("/ownRecipes", authenticate, ctrl.delOwnRecipes);
 // - удалить рецепт у пользователя
+
+router.get("/favorite/:userId", authenticate, ctrl.getFavorite);
+// - получение Favorite рецептов пользователя
+
+router.get("/shopping-list", authenticate, ctrl.getShoppingList);
 
 router.get("/favorite/:userId", authenticate, ctrl.getFavorite);
 // - получение Favorite рецептов пользователя
