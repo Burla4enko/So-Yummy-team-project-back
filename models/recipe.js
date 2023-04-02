@@ -1,7 +1,7 @@
-const Joi = require("joi");
-const { Schema, model } = require("mongoose");
+const Joi = require('joi');
+const { Schema, model, SchemaTypes } = require('mongoose');
 
-const { handleMongooseError } = require("../helpers");
+const { handleMongooseError } = require('../helpers');
 
 // регулярные выражения добавите по необходимости
 // const regExp...
@@ -10,41 +10,41 @@ const recipeSchema = new Schema(
   {
     title: {
       type: String,
-      required: [true, "Title is required"],
+      required: [true, 'Title is required'],
       minlength: 3,
     },
     category: {
       type: String,
       enum: [
-        "Beef",
-        "Breakfast",
-        "Chicken",
-        "Dessert",
-        "Goat",
-        "Lamb",
-        "Miscellaneous",
-        "Pasta",
-        "Pork",
-        "Seafood",
-        "Side",
-        "Starter",
-        "Vegan",
-        "Vegetarian",
+        'Beef',
+        'Breakfast',
+        'Chicken',
+        'Dessert',
+        'Goat',
+        'Lamb',
+        'Miscellaneous',
+        'Pasta',
+        'Pork',
+        'Seafood',
+        'Side',
+        'Starter',
+        'Vegan',
+        'Vegetarian',
       ],
-      default: "Breakfast",
+      default: 'Breakfast',
     },
     area: {
       type: String,
-      default: "",
+      default: '',
     },
     instructions: {
       type: String,
-      required: [true, "Instructions is required"],
+      required: [true, 'Instructions is required'],
       minlength: 20,
     },
     description: {
       type: String,
-      default: "",
+      default: '',
     },
     thumb: {
       type: String,
@@ -57,7 +57,7 @@ const recipeSchema = new Schema(
 
     time: {
       type: String,
-      required: [true, "time is required"],
+      required: [true, 'time is required'],
     },
     popularity: {
       type: Number,
@@ -73,7 +73,7 @@ const recipeSchema = new Schema(
     },
     youtube: {
       type: String,
-      default: "",
+      default: '',
     },
     tags: {
       type: Array,
@@ -81,33 +81,37 @@ const recipeSchema = new Schema(
     },
     ingredients: {
       type: Array,
-      required: [true, "ingredients is required"],
+      required: [true, 'ingredients is required'],
+    },
+    owner: {
+      type: SchemaTypes.ObjectId,
+      ref: 'user',
     },
   },
   { versionKey: false, timestamps: true }
 );
 
-recipeSchema.post("save", handleMongooseError);
+recipeSchema.post('save', handleMongooseError);
 
 const addRecipeSchema = Joi.object({
   title: Joi.string().min(3).required(),
   category: Joi.string()
     .required()
     .valid(
-      "Beef",
-      "Breakfast",
-      "Chicken",
-      "Dessert",
-      "Goat",
-      "Lamb",
-      "Miscellaneous",
-      "Pasta",
-      "Pork",
-      "Seafood",
-      "Side",
-      "Starter",
-      "Vegan",
-      "Vegetarian"
+      'Beef',
+      'Breakfast',
+      'Chicken',
+      'Dessert',
+      'Goat',
+      'Lamb',
+      'Miscellaneous',
+      'Pasta',
+      'Pork',
+      'Seafood',
+      'Side',
+      'Starter',
+      'Vegan',
+      'Vegetarian'
     ),
   area: Joi.string(),
   instructions: Joi.string().required().min(20),
@@ -130,6 +134,6 @@ const addRecipeSchema = Joi.object({
 const schemasJoi = { addRecipeSchema };
 // ...схемы валидации
 
-const Recipe = model("recipe", recipeSchema);
+const Recipe = model('recipe', recipeSchema);
 
 module.exports = { Recipe, schemasJoi };
