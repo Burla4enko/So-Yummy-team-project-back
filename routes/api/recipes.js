@@ -1,10 +1,6 @@
 const express = require("express");
 const ctrl = require("../../controllers/recipes");
-const {
-  authenticate,
-  // uploadCloud
-} = require("../../middlewares");
-// const { schemasJoi } = require("../../models/user");
+const { authenticate } = require("../../middlewares");
 
 const router = express.Router();
 
@@ -22,7 +18,6 @@ router.get("/:id", ctrl.getRecipeById);
 
 router.patch("/:id/favorite", authenticate, ctrl.addFavorite);
 // - добавление пользователем рецепта в FAvorite
-
 
 router.delete("/:id/favorite", authenticate, ctrl.delFavorite);
 // - удаление Favorite рецептов у пользователя

@@ -1,5 +1,6 @@
 const { User } = require("../../models/user");
 const { HttpError } = require("../../helpers");
+const { Recipe } = require("../../models/recipe");
 
 const getFavorite = async (req, res) => {
   const { _id: owner } = req.user;
@@ -10,7 +11,12 @@ const getFavorite = async (req, res) => {
   if (!result) {
     throw HttpError(404, "Not found");
   }
-  res.json(result.favorites);
+
+  const userFavoriteRecipes = await Recipe.find({
+    _id: [...result.favorites],
+  });
+
+  res.json(userFavoriteRecipes);
 };
 // получить все "избранные" рецепты
 
