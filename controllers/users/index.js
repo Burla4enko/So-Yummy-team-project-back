@@ -2,6 +2,7 @@ const { ctrlWrapper } = require("../../helpers");
 
 const updateUser = require("./updateUser");
 const getInfo = require("./getInfo");
+const getUserDetails = require('./getUserDetails');
 const subscribeUser = require("./subscribeUser");
 const getOwnRecipes = require("./getOwnRecipes");
 const addOwnRecipes = require("./addOwnRecipes");
@@ -14,6 +15,7 @@ const delShoppingList = require("./delShoppingList");
 module.exports = {
   updateUser: ctrlWrapper(updateUser),
   getInfo: ctrlWrapper(getInfo),
+  getUserDetails: ctrlWrapper(getUserDetails),
   subscribeUser: ctrlWrapper(subscribeUser),
   getOwnRecipes: ctrlWrapper(getOwnRecipes),
   addOwnRecipes: ctrlWrapper(addOwnRecipes),
