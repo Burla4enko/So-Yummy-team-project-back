@@ -1,12 +1,9 @@
 const { Recipe } = require("../../models/recipe");
-// const { HttpError, ctrlWrapper } = require("../../helpers");
 
 const getRecipesByCategory = async (req, res) => {
   const recipes = await Recipe.find({
     category: ["Breakfast", "Dessert", "Miscellaneous", "Chicken"],
-  })
-    .limit(90)
-    .select("_id title category thumb");
+  }).select("_id title category thumb");
 
   const filteredRecipies = [[], [], [], []];
   const [BreakfastArr, DessertArr, MiscellArr, ChickenArr] = filteredRecipies;
