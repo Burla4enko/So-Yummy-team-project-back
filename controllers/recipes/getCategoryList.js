@@ -8,14 +8,14 @@ const getCategoryList = async (req, res) => {
   });
 
   baseResult.map((item) => {
-    allRecipesCategoryList.push(item["category"]);
+    return allRecipesCategoryList.push(item.category);
   });
 
   const uniqueCategoryList = allRecipesCategoryList.filter(
     (category, index, array) => array.indexOf(category) === index
   );
 
-  return res.status(200).json(uniqueCategoryList);
+  res.status(200).json(uniqueCategoryList);
 };
 
 module.exports = getCategoryList;
