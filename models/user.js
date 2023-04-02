@@ -25,8 +25,8 @@ const userSchema = new Schema(
       match: emailRegexp,
     },
     token: {
-      type: String,
-      default: null,
+      type: Array,
+      default: [],
     },
     // avatarURL: {        ------ поставить заглушку из макета, после привязки к Cloudinary активируем
     //   type: String,

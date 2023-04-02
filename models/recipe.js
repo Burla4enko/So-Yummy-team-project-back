@@ -3,6 +3,23 @@ const { Schema, model, SchemaTypes } = require('mongoose');
 
 const { handleMongooseError } = require('../helpers');
 
+const categoryList = [
+  "Beef",
+  "Breakfast",
+  "Chicken",
+  "Dessert",
+  "Goat",
+  "Lamb",
+  "Miscellaneous",
+  "Pasta",
+  "Pork",
+  "Seafood",
+  "Side",
+  "Starter",
+  "Vegan",
+  "Vegetarian",
+];
+
 // регулярные выражения добавите по необходимости
 // const regExp...
 
@@ -15,23 +32,8 @@ const recipeSchema = new Schema(
     },
     category: {
       type: String,
-      enum: [
-        'Beef',
-        'Breakfast',
-        'Chicken',
-        'Dessert',
-        'Goat',
-        'Lamb',
-        'Miscellaneous',
-        'Pasta',
-        'Pork',
-        'Seafood',
-        'Side',
-        'Starter',
-        'Vegan',
-        'Vegetarian',
-      ],
-      default: 'Breakfast',
+      enum: categoryList,
+      default: "Breakfast",
     },
     area: {
       type: String,
@@ -54,7 +56,6 @@ const recipeSchema = new Schema(
       type: String,
       //   default: "", - создать default заглушку при создании
     },
-
     time: {
       type: String,
       required: [true, 'time is required'],
@@ -97,22 +98,7 @@ const addRecipeSchema = Joi.object({
   title: Joi.string().min(3).required(),
   category: Joi.string()
     .required()
-    .valid(
-      'Beef',
-      'Breakfast',
-      'Chicken',
-      'Dessert',
-      'Goat',
-      'Lamb',
-      'Miscellaneous',
-      'Pasta',
-      'Pork',
-      'Seafood',
-      'Side',
-      'Starter',
-      'Vegan',
-      'Vegetarian'
-    ),
+    .valid(...categoryList),
   area: Joi.string(),
   instructions: Joi.string().required().min(20),
   description: Joi.string(),
