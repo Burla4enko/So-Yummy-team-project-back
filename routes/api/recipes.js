@@ -14,7 +14,7 @@ router.get("/category-list", ctrl.getCategoryList);
 router.get("/main-page", ctrl.getRecipesByCategory);
 // - получить рецепты по категориям для главной страницы
 
-router.get("/by-cat/:category", ctrl.getRecipesByCategoryLimited);
+router.get("/:category", ctrl.getRecipesByCategoryLimited);
 // - получить рецепты по категориям по 8 шт., над названием подумайте :)
 
 router.get("/byId/:id", ctrl.getRecipeById);
