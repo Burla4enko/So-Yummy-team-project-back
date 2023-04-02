@@ -1,17 +1,17 @@
-const { ctrlWrapper } = require("../../helpers");
+const { ctrlWrapper } = require('../../helpers');
 
-const updateUser = require("./updateUser");
-const getInfo = require("./getInfo");
-const subscribeUser = require("./subscribeUser");
-const getOwnRecipes = require("./getOwnRecipes");
-const addOwnRecipes = require("./addOwnRecipes");
-const delOwnRecipes = require("./delOwnRecipes");
-const addFavorite = require("./addFavorite");
-const getFavorite = require("./getFavorite");
-const delFavorite = require("./delFavorite");
-const getShoppingList = require("./getShoppingList");
-const addShoppingList = require("./addShoppingList");
-const delShoppingList = require("./delShoppingList");
+const updateUser = require('./updateUser');
+const getInfo = require('./getInfo');
+const subscribeUser = require('./subscribeUser');
+const getOwnRecipes = require('./getOwnRecipes');
+const addOwnRecipes = require('./addOwnRecipes');
+const delOwnRecipes = require('./delOwnRecipes');
+const addFavorite = require('./addFavorite');
+const getFavorite = require('./getFavorite');
+const delFavorite = require('./delFavorite');
+const getShoppingList = require('./getShoppingList');
+const addShoppingList = require('./addShoppingList');
+const delShoppingList = require('./delShoppingList');
 
 module.exports = {
   updateUser: ctrlWrapper(updateUser),

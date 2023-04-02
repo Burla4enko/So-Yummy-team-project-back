@@ -1,4 +1,4 @@
 const getFavorite = async (req, res) => {};
 // получить все "избранные" рецепты
 
-module.export = getFavorite;
+module.exports = getFavorite;
