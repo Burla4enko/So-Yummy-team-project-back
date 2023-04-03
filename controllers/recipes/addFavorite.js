@@ -8,15 +8,17 @@ const addFavorite = async (req, res) => {
   const result = await Recipe.findByIdAndUpdate(
     { _id: id },
     {
-      $addToSet: { favorites: owner },
+      $addToSet: { favorites: owner, owner: owner },
     },
     {
       new: true,
     }
   );
+
   if (!result) {
     throw HttpError(404, "Not found");
   }
+
   res.json(result);
 };
 // добавить рецепт в "избранное"

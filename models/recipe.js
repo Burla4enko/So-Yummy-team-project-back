@@ -85,7 +85,8 @@ const recipeSchema = new Schema(
       required: [true, "ingredients is required"],
     },
     owner: {
-      type: Schema.Types.ObjectId,
+      type: Array,
+      default: [],
       ref: "user",
       required: true,
     },

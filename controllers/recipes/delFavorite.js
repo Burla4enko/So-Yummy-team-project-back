@@ -4,11 +4,10 @@ const { HttpError } = require("../../helpers");
 const delFavorite = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
- 
 
   const result = await Recipe.findByIdAndUpdate(
     { _id: id },
-    { $pull: { favorites: owner } },
+    { $pull: { favorites: owner, owner: owner } },
 
     {
       new: true,
