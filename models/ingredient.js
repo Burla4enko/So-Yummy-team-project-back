@@ -13,7 +13,8 @@ const ingredientSchema = new Schema({
   thb: {
     type: String,
     required: true,
-    // default: "" - добавим когда будет Cloudinary
+    default:
+      "https://res.cloudinary.com/dwqwy0spx/image/upload/v1680522081/SoYummyStubs/meat_wdeuf6.svg",
   },
 });
 
