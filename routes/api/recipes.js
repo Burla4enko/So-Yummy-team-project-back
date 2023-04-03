@@ -1,6 +1,9 @@
 const express = require("express");
 const ctrl = require("../../controllers/recipes");
-// const { authenticate, uploadCloud } = require("../../middlewares");
+const {
+  authenticate,
+  // uploadCloud
+} = require("../../middlewares");
 // const { schemasJoi } = require("../../models/user");
 
 const router = express.Router();
@@ -11,11 +14,18 @@ router.get("/category-list", ctrl.getCategoryList);
 router.get("/main-page", ctrl.getRecipesByCategory);
 // - получить рецепты по категориям для главной страницы
 
-router.get("/:category", ctrl.getRecipesByCategoryLimited);
+router.get("/categories/:category", ctrl.getRecipesByCategoryLimited);
 // - получить рецепты по категориям по 8 шт., над названием подумайте :)
 
-router.get("/:id", ctrl.getRecipeById);
+router.get("/byId/:id", ctrl.getRecipeById);
 // - получить рецепт по id
+
+router.patch("/:id/favorite", authenticate, ctrl.addFavorite);
+// - добавление пользователем рецепта в FAvorite
+
+
+router.delete("/:id/favorite", authenticate, ctrl.delFavorite);
+// - удаление Favorite рецептов у пользователя
 
 router.get("/search", ctrl.getRecipeByRequest);
 // - поиск рецептов

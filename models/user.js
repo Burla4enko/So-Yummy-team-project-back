@@ -28,10 +28,12 @@ const userSchema = new Schema(
       type: Array,
       default: [],
     },
-    // avatarURL: {        ------ поставить заглушку из макета, после привязки к Cloudinary активируем
-    //   type: String,
-    //   required: true,
-    // },
+    avatarURL: {
+      type: String,
+      required: true,
+      default:
+        "https://res.cloudinary.com/dwqwy0spx/image/upload/v1680522878/SoYummyStubs/user_kbu3aa.svg",
+    },
     verify: {
       type: Boolean,
       default: false,
@@ -40,6 +42,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
       required: [true, "Verify token is required"],
+    },
+    favorites: {
+      type: Array,
+      default: [],
     },
   },
   { versionKey: false, timestamps: true }
