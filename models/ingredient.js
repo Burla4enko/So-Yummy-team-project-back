@@ -1,23 +1,37 @@
 const { Schema, model } = require("mongoose");
+const Joi = require("joi");
+const { handleMongooseError } = require("../helpers");
 
-const schema = Schema({
+const ingredientSchema = new Schema({
   ttl: {
     type: String,
-    required: true,
+    minlength: 2,
+    required: [true, "Title is required"],
   },
-  desc: {
-    type: String,
-  },
-  t: {
-    type: String,
-  },
+  desc: String,
+  t: String,
   thb: {
     type: String,
+    required: true,
+    // default: "" - добавим когда будет Cloudinary
   },
 });
 
-const Ingredient = model("ingredient", schema);
+ingredientSchema.post("save", handleMongooseError);
 
-module.exports = {
-  Ingredient,
-};
+const addIngredientSchema = Joi.object({
+  ttl: Joi.string()
+    .min(2)
+    .required()
+    .messages({ "any.required": "missing required field Title" }),
+  desc: Joi.string(),
+  t: Joi.string(),
+  thb: Joi.string()
+    .required()
+    .messages({ "any.required": "missing required field Thb" }),
+});
+
+const Ingredient = model("ingredient", ingredientSchema);
+const schemasJoi = { addIngredientSchema };
+
+module.exports = { Ingredient, schemasJoi };
