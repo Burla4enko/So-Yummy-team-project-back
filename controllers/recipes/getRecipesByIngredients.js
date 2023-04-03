@@ -6,12 +6,11 @@ const getRecipesByIngredients = async (req, res) => {
   const result = await Ingredient.find({
     $text: { $search: query },
   });
-  const ingredientId = result[0]._id;
-  console.log("ingredientId", ingredientId);
 
-  const value = await Recipe.find({
-    "ingredients.id": ingredientId,
-  });
+  // const ingredientId = result[0]._id;
+  const ingredientsId = result.map((item) => item._id);
+
+  const value = await Recipe.find({ "ingredients.id": { $in: ingredientsId } });
 
   return res.json(value);
 };

@@ -11,11 +11,11 @@ router.get("/category-list", ctrl.getCategoryList);
 router.get("/main-page", ctrl.getRecipesByCategory);
 // - получить рецепты по категориям для главной страницы
 
-router.get("/:category", ctrl.getRecipesByCategoryLimited);
-// - получить рецепты по категориям по 8 шт., над названием подумайте :)
+// router.get("/:category", ctrl.getRecipesByCategoryLimited);
+// // - получить рецепты по категориям по 8 шт., над названием подумайте :)
 
-router.get("/:id", ctrl.getRecipeById);
-// - получить рецепт по id
+// router.get("/:id", ctrl.getRecipeById);
+// // - получить рецепт по id
 
 router.get("/search", ctrl.getRecipeByRequest);
 // - поиск рецептов
