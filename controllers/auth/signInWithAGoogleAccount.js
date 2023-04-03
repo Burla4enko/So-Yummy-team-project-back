@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const generator = require("generate-password");
 const { User } = require("../../models/user");
 const { sendEmail } = require("../../helpers");
+const { accessDataMail } = require("../../helpers/mails");
 
 const signInWithAGoogleAccount = async (data) => {
   const user = await User.findOne({ email: data.email });
@@ -32,13 +33,13 @@ const signInWithAGoogleAccount = async (data) => {
     verificationToken: "google",
   });
 
-    const accessDataEmail = {
-      to: data.email,
-      subject: "So Yummy access data",
-      html: `<p>Congratulations! You have signed up for So Yummy. Your password: <b>${password}</b></p>`,
-    };
+  const accessDataEmail = {
+    to: data.email,
+    subject: "So Yummy access data",
+    html: accessDataMail(password),
+  };
 
-    await sendEmail(accessDataEmail);
+  await sendEmail(accessDataEmail);
 
   const newUser = await User.findOne({ email: data.email });
   const payload = { id: newUser._id };
