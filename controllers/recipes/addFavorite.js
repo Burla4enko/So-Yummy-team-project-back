@@ -1,13 +1,15 @@
-const { User } = require("../../models/user");
+const { Recipe } = require("../../models/recipe");
 const { HttpError } = require("../../helpers");
 
 const addFavorite = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
-  const result = await User.findOneAndUpdate(
-    { _id: owner },
-    { $push: { favorites: id } },
+  const result = await Recipe.findByIdAndUpdate(
+    { _id: id },
+    {
+      $addToSet: { favorites: owner },
+    },
     {
       new: true,
     }
