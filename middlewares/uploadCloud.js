@@ -1,7 +1,6 @@
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
-require("dotenv").config();
 
 const { CLOUDINARY_NAME, CLOUDINARY_KEY, CLOUDINARY_SECRET } = process.env;
 
@@ -20,6 +19,25 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const uploadCloud = multer({ storage });
+const storageRecipe = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: (req, file) => {
+    return {
+      folder: "recipe",
+      format: ["jpg", "png"],
+      public_id: file.originalname,
+      // transformation: [
+      //   {
+      //     height: 300,
+      //     width: 300,
+      //     crop: 'fill',
+      //   },
+      // ],
+    };
+  },
+});
 
-module.exports = uploadCloud;
+const uploadCloud = multer({ storage });
+const uploadCloudRecipe = multer({ storage: storageRecipe });
+
+module.exports = { uploadCloud, uploadCloudRecipe };

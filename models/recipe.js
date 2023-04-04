@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const { handleMongooseError } = require("../helpers");
 
@@ -50,11 +50,13 @@ const recipeSchema = new Schema(
     },
     thumb: {
       type: String,
-      //   default: "", - создать default заглушку при создании
+      default:
+        "https://res.cloudinary.com/dwqwy0spx/image/upload/v1680522282/SoYummyStubs/thumbStub_y5no2y.svg",
     },
     preview: {
       type: String,
-      //   default: "", - создать default заглушку при создании
+      default:
+        "https://res.cloudinary.com/dwqwy0spx/image/upload/v1680522281/SoYummyStubs/previewStub_hzlkpw.svg",
     },
     time: {
       type: String,
@@ -62,7 +64,7 @@ const recipeSchema = new Schema(
     },
     popularity: {
       type: Number,
-      default: null,
+      default: 0,
     },
     favorites: {
       type: Array,
@@ -78,7 +80,7 @@ const recipeSchema = new Schema(
     },
     tags: {
       type: Array,
-      default: undefined,
+      default: [],
     },
     ingredients: {
       type: Array,
