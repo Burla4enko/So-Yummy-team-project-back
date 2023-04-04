@@ -1,6 +1,7 @@
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const multer = require("multer");
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 
 const { CLOUDINARY_NAME, CLOUDINARY_KEY, CLOUDINARY_SECRET } = process.env;
 
@@ -12,8 +13,8 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  folder: "avatars",
-  allowedFormats: ["jpg", "png"],
+  folder: 'avatars',
+  allowedFormats: ['jpg', 'png'],
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
@@ -23,16 +24,9 @@ const storageRecipe = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: (req, file) => {
     return {
-      folder: "recipe",
-      format: ["jpg", "png"],
-      public_id: file.originalname,
-      // transformation: [
-      //   {
-      //     height: 300,
-      //     width: 300,
-      //     crop: 'fill',
-      //   },
-      // ],
+      folder: 'recipe',
+      allowedFormats: ['jpg', 'png'],
+      public_id: `${uuidv4()}_${file.originalname}`,
     };
   },
 });
