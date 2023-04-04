@@ -8,12 +8,16 @@ const addFavorite = async (req, res) => {
   const result = await Recipe.findByIdAndUpdate(
     { _id: id },
     {
-      $addToSet: { favorites: owner, owner: owner },
+      $addToSet: { favorites: owner },
     },
     {
       new: true,
     }
   );
+
+  if (result.favorites.indexOf(owner) >= 0) {
+    throw HttpError(404, "Already added to favorites");
+  }
 
   if (!result) {
     throw HttpError(404, "Not found");

@@ -20,11 +20,10 @@ router.get("/:category", ctrl.getRecipesByCategoryLimited);
 router.get("/byId/:id", ctrl.getRecipeById);
 // - получить рецепт по id
 
-router.patch("/:id/favorite", authenticate, ctrl.addFavorite);
+router.patch("/favorite/:id", authenticate, ctrl.addFavorite);
 // - добавление пользователем рецепта в FAvorite
 
-
-router.delete("/:id/favorite", authenticate, ctrl.delFavorite);
+router.delete("/favorite/:id", authenticate, ctrl.delFavorite);
 // - удаление Favorite рецептов у пользователя
 
 router.get("/search", ctrl.getRecipeByRequest);
