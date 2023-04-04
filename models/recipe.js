@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const { Schema, model, SchemaTypes } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const { handleMongooseError } = require("../helpers");
 
@@ -64,7 +64,7 @@ const recipeSchema = new Schema(
     },
     popularity: {
       type: Number,
-      default: null,
+      default: 0,
     },
     favorites: {
       type: Array,
@@ -80,7 +80,7 @@ const recipeSchema = new Schema(
     },
     tags: {
       type: Array,
-      default: undefined,
+      default: [],
     },
     ingredients: {
       type: Array,
