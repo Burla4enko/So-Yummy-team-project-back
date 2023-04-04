@@ -32,7 +32,7 @@ router.post(
 router.delete('/ownRecipes', authenticate, ctrl.delOwnRecipes);
 // - удалить рецепт у пользователя
 
-router.get('/favorite/:userId', authenticate, ctrl.getFavorite);
+router.get("/favorite", authenticate, ctrl.getFavorite);
 // - получение Favorite рецептов пользователя
 
 router.get('/shopping-list', authenticate, ctrl.getShoppingList);
