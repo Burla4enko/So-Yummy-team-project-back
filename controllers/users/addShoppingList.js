@@ -7,13 +7,21 @@ const addShoppingList = async (req, res) => {
   // getting ingredient Id from req.body of post query
   const { ingredientId, ingredientQuantity } = req.body;
 
-  // creating new item in ShoppingList collection
-  const result = await ShoppingList.create({
-    ingredientId,
-    ingredientQuantity,
-    owner,
-  });
-  // sending 201 to front-end
+  // we try to update existing document in DB (using push). If there is no such document (there is no doc with current "owner field"), this doc will be created.
+  const result = await ShoppingList.findOneAndUpdate(
+    { owner },
+    {
+      $push: {
+        list: {
+          ingredientId: ingredientId,
+          ingredientQuantity: ingredientQuantity,
+        },
+      },
+    },
+
+    { upsert: true, new: true, projection: { list: 1 } }
+  );
+
   res.status(201).json({
     status: "success",
     code: 201,

@@ -14,6 +14,8 @@ const delShoppingList = async (req, res) => {
   res.status(200).json({
     code: 200,
     message: "shopping list item has been deleted",
+    // !! added result so I can delete it from redux
+    data: { result },
   });
 };
 // удалить продукт из списка покупок
