@@ -15,7 +15,7 @@ router.patch('/', authenticate, uploadCloud.single('avatar'), ctrl.updateUser);
 router.get('/info', authenticate, ctrl.getInfo);
 // - получение инфо о пользователе
 
-router.get("/info/details", authenticate, ctrl.getUserDetails);
+router.get("/info/details/:query", authenticate, ctrl.getUserDetails);
 // - задание со *, вывод ПОЛНОЙ инфо оп опльзователю:  кількість днів він в додатку, кількість доданих рецептів, кількість рецептів до обраних.
 
 router.get('/ownRecipes', authenticate, ctrl.getOwnRecipes);
