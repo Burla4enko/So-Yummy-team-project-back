@@ -36,3 +36,4 @@ const Ingredient = model("ingredient", ingredientSchema);
 const schemasJoi = { addIngredientSchema };
 
 module.exports = { Ingredient, schemasJoi };
+
