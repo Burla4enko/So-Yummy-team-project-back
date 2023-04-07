@@ -16,15 +16,10 @@ const verifyEmail = async (req, res) => {
   user.token.push(token);
   await User.findByIdAndUpdate(user._id, { token: user.token });
 
-  res.json({
-    message: "Verification successful",
-    token,
-    user: {
-      name: user.name,
-      email: user.email,
-    },
-  });
+  res.redirect(
+    `${process.env.FRONTEND_URL}?token=${token}&name=${user.name}&email=${user.email}`
+  );
 };
-// при успішному підтвердженні -> отримує token -> frontend main
+// при успішному підтвердженні -> отримує token -> redirect to frontend main
 
 module.exports = verifyEmail;
