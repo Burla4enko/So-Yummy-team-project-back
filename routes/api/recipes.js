@@ -29,9 +29,6 @@ router.delete("/favorite/:id", authenticate, ctrl.delFavorite);
 router.get("/search", ctrl.getRecipeByRequest);
 // - поиск рецептов
 
-router.get("/ingredients", ctrl.getRecipesByIngredients);
-// - поиск рецептов по игредиентам
-
 router.get("/ingredients/list", ctrl.getIngredientsList);
 // - вывести список ингредиентов
 
