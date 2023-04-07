@@ -1,7 +1,7 @@
 const { ShoppingList } = require("../../models/shopping-list");
 
 // !!!Ingredient is actually used by POPULATE!!!!!
-const { Ingredient } = require("../../models/ingredient");
+// const { Ingredient } = require("../../models/ingredient");
 
 const getShoppingList = async (req, res) => {
   const { _id } = req.user;
