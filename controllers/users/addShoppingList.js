@@ -19,8 +19,8 @@ const addShoppingList = async (req, res) => {
       },
     },
 
-    { upsert: true, new: true, projection: { list: 1 } }
-  );
+    { upsert: true, new: true, projection: { list: { $slice: -1 } } }
+  ).populate("list.ingredientId", { ttl: 1, thb: 1 });
 
   res.status(201).json({
     status: "success",

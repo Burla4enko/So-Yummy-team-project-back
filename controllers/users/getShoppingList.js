@@ -11,6 +11,11 @@ const getShoppingList = async (req, res) => {
     { owner: _id },
     { updatedAt: 0, createdAt: 0 }
   ).populate("list.ingredientId", { ttl: 1, thb: 1 });
+  console.log(completeShoppingList);
+  // const completeShoppingList = await ShoppingList.findOne(
+  //   { owner: _id },
+  //   { updatedAt: 0, createdAt: 0, list: 1, _id: 0 }
+  // ).populate("list.ingredientId", { ttl: 1, thb: 1 });
 
   res.json({
     status: "success",
