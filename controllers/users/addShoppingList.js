@@ -1,11 +1,16 @@
 const { ShoppingList } = require("../../models/shopping-list");
-
+const { BadRequest } = require("http-errors");
 const addShoppingList = async (req, res) => {
   // getting user Id from authenticate
   const { _id: owner } = req.user;
 
   // getting ingredient Id from req.body of post query
   const { ingredientId, ingredientQuantity } = req.body;
+  if (!ingredientId || !ingredientQuantity) {
+    throw new BadRequest(
+      "ingredientId or/and ingredientQuantity are missing/wrong"
+    );
+  }
 
   // we try to update existing document in DB (using push). If there is no such document (there is no doc with current "owner field"), this doc will be created.
   const result = await ShoppingList.findOneAndUpdate(

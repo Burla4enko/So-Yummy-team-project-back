@@ -8,10 +8,13 @@ const delShoppingList = async (req, res) => {
   // deleting shopping list item from the database by it's OWN id (not user id, not ingredient id)
 
   const result = await ShoppingList.updateOne(
-    { owner },
+    { owner, "list._id": id },
     { $pull: { list: { _id: id } } },
     { new: true }
   );
+  if (result.modifiedCount === 0) {
+    throw new NotFound("Shopping list item not found");
+  }
   if (!result) {
     throw new NotFound("Not found, can't delete");
   }
