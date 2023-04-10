@@ -1,7 +1,8 @@
 const { ShoppingList } = require("../../models/shopping-list");
 
 // !!!Ingredient is actually used by POPULATE!!!!!
-// const { Ingredient } = require("../../models/ingredient");
+// eslint-disable-next-line no-unused-vars
+const { Ingredient } = require("../../models/ingredient");
 
 const getShoppingList = async (req, res) => {
   const { _id } = req.user;
@@ -9,7 +10,12 @@ const getShoppingList = async (req, res) => {
   const completeShoppingList = await ShoppingList.find(
     { owner: _id },
     { updatedAt: 0, createdAt: 0 }
-  ).populate("ingredientId", { ttl: 1, thb: 1 });
+  ).populate("list.ingredientId", { ttl: 1, thb: 1 });
+  // const completeShoppingList = await ShoppingList.findOne(
+  //   { owner: _id },
+  //   { updatedAt: 0, createdAt: 0, list: 1, _id: 0 }
+  // ).populate("list.ingredientId", { ttl: 1, thb: 1 });
+
   res.json({
     status: "success",
     code: 200,
