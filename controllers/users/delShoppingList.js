@@ -3,14 +3,12 @@ const { NotFound } = require("http-errors");
 
 const delShoppingList = async (req, res) => {
   // getting shopping list item ID to delete from req.body
-
+  const { _id: owner } = req.user;
   const { id } = req.body;
-  console.log(` THIS IS ID FOR DELETION - ${id}`);
-  // deleting shopping list item drom the database by it's OWN id (not user id, not ingredient id)
+  // deleting shopping list item from the database by it's OWN id (not user id, not ingredient id)
 
-  // !! works !!!
   const result = await ShoppingList.updateOne(
-    {},
+    { owner },
     { $pull: { list: { _id: id } } },
     { new: true }
   );

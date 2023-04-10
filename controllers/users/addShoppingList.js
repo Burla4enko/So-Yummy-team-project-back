@@ -13,8 +13,8 @@ const addShoppingList = async (req, res) => {
     {
       $push: {
         list: {
-          ingredientId: ingredientId,
-          ingredientQuantity: ingredientQuantity,
+          ingredientId,
+          ingredientQuantity,
         },
       },
     },
