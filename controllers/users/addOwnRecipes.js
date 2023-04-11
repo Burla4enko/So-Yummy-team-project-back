@@ -1,21 +1,23 @@
 const { Recipe } = require('../../models/recipe');
-const { Ingredient } = require('../../models/ingredient');
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
 const addOwnRecipes = async (req, res) => {
   const { _id: owner } = req.user;
-  const { path } = req.file;
+  const { path } = req.file; /*Добавити заглушку не знаю де вона лежить*/
   const { ingredients = [], ...recipe } = req.body;
 
-  const ingredientsList = await Ingredient.find({
-    _id: { $in: ingredients.map((id) => new ObjectId(id)) },
-  });
+  const newIngredients = ingredients.map((ingredient) => ({
+    id: new ObjectId(ingredient.id),
+    measure: ingredient.measure,
+  }));
+
   const result = await Recipe.create({
     owner,
     thumb: path,
+    preview: path,
     ...recipe,
-    ingredients: ingredientsList,
+    ingredients: newIngredients,
   });
 
   const recipesList = await Recipe.find({ owner });

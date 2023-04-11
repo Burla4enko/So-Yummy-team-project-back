@@ -27,6 +27,7 @@ const storageRecipe = new CloudinaryStorage({
       folder: 'recipe',
       allowedFormats: ['jpg', 'png'],
       public_id: `${uuidv4()}_${file.originalname}`,
+      transformation: [{ width: 700, height: 700 }],
     };
   },
 });
