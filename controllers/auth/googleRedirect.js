@@ -34,10 +34,10 @@ const googleRedirect = async (req, res) => {
     headers: { Authorization: `Bearer ${tokenData.data.access_token}` },
   });
 
-    const { token, avatarURL } = await signInWithAGoogleAccount(userData.data);
-
+  const { token, id, avatarURL } = await signInWithAGoogleAccount(userData.data);
+  
     return res.redirect(
-      `${process.env.FRONTEND_URL}?token=${token}&name=${userData.data.name}&email=${userData.data.email}&avatarURL=${avatarURL}`
+      `${process.env.FRONTEND_URL}?token=${token}&id=${id}&name=${userData.data.name}&email=${userData.data.email}&avatarURL=${avatarURL}`
     );
 };
 

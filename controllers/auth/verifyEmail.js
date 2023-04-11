@@ -17,7 +17,7 @@ const verifyEmail = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token: user.token });
 
   res.redirect(
-    `${process.env.FRONTEND_URL}?token=${token}&name=${user.name}&email=${user.email}&avatarUR=${user.avatarURL}L`
+    `${process.env.FRONTEND_URL}?token=${token}&id=${user._id}&name=${user.name}&email=${user.email}&avatarURL=${user.avatarURL}`
   );
 };
 // при успішному підтвердженні -> отримує token -> redirect to frontend main
