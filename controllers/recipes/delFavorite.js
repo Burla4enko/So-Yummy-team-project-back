@@ -5,6 +5,14 @@ const delFavorite = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
+  const isAlreadyAdded = await Recipe.findOne({
+    $and: [{ _id: id }, { favorites: owner }],
+  });
+
+  if (!isAlreadyAdded) {
+    throw HttpError(404, "This recipe is not in favorites.");
+  }
+
   const result = await Recipe.findByIdAndUpdate(
     { _id: id },
     { $pull: { favorites: owner } },
@@ -14,10 +22,6 @@ const delFavorite = async (req, res) => {
   );
   if (!result) {
     throw HttpError(404, "Not found");
-  }
-
-  if (result.favorites.indexOf(id) === -1) {
-    throw HttpError(404, "Already removed");
   }
 
   res.json({ message: "Removed from favorites" });

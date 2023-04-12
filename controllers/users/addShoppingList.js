@@ -1,5 +1,6 @@
+const { HttpError } = require("../../helpers");
+const { Ingredient } = require("../../models/ingredient");
 const { ShoppingList } = require("../../models/shopping-list");
-
 const addShoppingList = async (req, res) => {
   // getting user Id from authenticate
   const { _id: owner } = req.user;
@@ -7,13 +8,27 @@ const addShoppingList = async (req, res) => {
   // getting ingredient Id from req.body of post query
   const { ingredientId, ingredientQuantity } = req.body;
 
-  // creating new item in ShoppingList collection
-  const result = await ShoppingList.create({
-    ingredientId,
-    ingredientQuantity,
-    owner,
-  });
-  // sending 201 to front-end
+  const isIngredient = await Ingredient.findOne({ _id: ingredientId });
+
+  if (!isIngredient) {
+    throw HttpError(404, "Ingredient not found");
+  }
+
+  // we try to update existing document in DB (using push). If there is no such document (there is no doc with current "owner field"), this doc will be created.
+  const result = await ShoppingList.findOneAndUpdate(
+    { owner },
+    {
+      $push: {
+        list: {
+          ingredientId,
+          ingredientQuantity,
+        },
+      },
+    },
+
+    { upsert: true, new: true, projection: { list: { $slice: -1 } } }
+  ).populate("list.ingredientId", { ttl: 1, thb: 1 });
+
   res.status(201).json({
     status: "success",
     code: 201,

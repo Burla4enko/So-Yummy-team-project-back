@@ -15,7 +15,7 @@ const signInWithAGoogleAccount = async (data) => {
     user.token.push(token);
     await User.findByIdAndUpdate(user._id, { token: user.token });
 
-    return token;
+    return { token, id: user._id, avatarURL: user.avatarURL };
   }
 
   const password = generator.generate({
@@ -53,7 +53,7 @@ const signInWithAGoogleAccount = async (data) => {
     verificationToken: null,
   });
 
-  return token;
+  return { token, id: newUser._id, avatarURL: newUser.avatarURL };
 };
 
 module.exports = signInWithAGoogleAccount;

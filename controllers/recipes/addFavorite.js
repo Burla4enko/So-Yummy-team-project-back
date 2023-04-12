@@ -5,20 +5,23 @@ const addFavorite = async (req, res) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
 
-  const alreadyAdded = !!(await Recipe.findOne({ _id: id, favorites: { $in: [owner] } }));
-  
-  if (alreadyAdded) {
+  const isAlreadyAdded = await Recipe.findOne({
+    $and: [{ _id: id }, { favorites: owner }],
+  });
+
+  if (isAlreadyAdded) {
     throw HttpError(404, "Already added to favorites");
   }
 
-// здесь можно вместо второго запроса использовать updateOne и делать проверку на result.modifiedCount>0
+  // здесь можно вместо второго запроса использовать updateOne и делать проверку на result.modifiedCount>0
   const result = await Recipe.findByIdAndUpdate(
     { _id: id },
     {
-      $addToSet: { favorites: owner },
+      $push: { favorites: owner },
     },
     {
-      new: true, runValidators: true,
+      new: true,
+      runValidators: true,
     }
   );
 
