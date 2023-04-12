@@ -16,7 +16,7 @@ const addFavorite = async (req, res) => {
   );
 
   if (result.favorites.indexOf(owner) >= 0) {
-    throw HttpError(404, "Already added to favorites");
+    throw HttpError(200, "Already added to favorites");
   }
 
   if (!result) {
