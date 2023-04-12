@@ -1,11 +1,18 @@
+const { HttpError } = require("../../helpers");
+const { Ingredient } = require("../../models/ingredient");
 const { ShoppingList } = require("../../models/shopping-list");
-
 const addShoppingList = async (req, res) => {
   // getting user Id from authenticate
   const { _id: owner } = req.user;
 
   // getting ingredient Id from req.body of post query
   const { ingredientId, ingredientQuantity } = req.body;
+
+  const isIngredient = await Ingredient.findOne({ _id: ingredientId });
+
+  if (!isIngredient) {
+    throw HttpError(404, "Ingredient not found");
+  }
 
   // we try to update existing document in DB (using push). If there is no such document (there is no doc with current "owner field"), this doc will be created.
   const result = await ShoppingList.findOneAndUpdate(

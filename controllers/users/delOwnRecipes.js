@@ -2,7 +2,7 @@ const { Recipe } = require('../../models/recipe');
 const { HttpError } = require('../../helpers');
 
 const delOwnRecipes = async (req, res) => {
-  const { _id: recipeId } = req.body; //<- отримує ID рецепту//
+  const { _id: recipeId } = req.body;
   const result = await Recipe.findByIdAndRemove(recipeId);
   if (!result) {
     throw HttpError(404, 'Server not found');
