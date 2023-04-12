@@ -21,7 +21,6 @@ const addFavorite = async (req, res) => {
     },
     {
       new: true,
-      runValidators: true,
     }
   );
 
