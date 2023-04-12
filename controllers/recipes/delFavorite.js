@@ -17,7 +17,7 @@ const delFavorite = async (req, res) => {
   }
 
   if (result.favorites.indexOf(id) === -1) {
-    throw HttpError(404, "Already removed");
+    throw HttpError(200, "Already removed");
   }
 
   res.json({ message: "Removed from favorites" });
