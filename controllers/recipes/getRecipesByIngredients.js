@@ -3,8 +3,7 @@ const { Ingredient } = require("../../models/ingredient");
 const { HttpError } = require("../../helpers");
 
 const getRecipesByIngredients = async (req, res) => {
-  const { page = 1, limit = 6, query } = req.query;
-  const skip = (page - 1) * limit;
+  const { query } = req.query;
   const result = await Ingredient.find({
     $text: { $search: query },
   });
@@ -14,11 +13,7 @@ const getRecipesByIngredients = async (req, res) => {
   // const ingredientId = result[0]._id;
   const ingredientsId = result.map((item) => item._id);
 
-  const value = await Recipe.find(
-    { "ingredients.id": { $in: ingredientsId } },
-    "",
-    { skip, limit }
-  );
+  const value = await Recipe.find({ "ingredients.id": { $in: ingredientsId } });
   if (value.length === 0) {
     throw HttpError(404, "recipe not found");
   }
