@@ -12,7 +12,7 @@ const delShoppingList = async (req, res) => {
     { $pull: { list: { _id: id } } },
     { new: true }
   );
-  if (result.modifiedCount === 0) {
+  if (result?.modifiedCount === 0) {
     throw new NotFound("Shopping list item not found");
   }
   if (!result) {
@@ -23,7 +23,7 @@ const delShoppingList = async (req, res) => {
     code: 200,
     message: "shopping list item has been deleted",
     // !! added result so I can delete it from redux
-    data: { result },
+    data: { id },
   });
 };
 // удалить продукт из списка покупок
